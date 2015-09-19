@@ -22,7 +22,9 @@ app.get('/bechdel.json', function(req, res) {
 	});
 });
 
-
+app.get('/about', function(req, res){
+	res.send("All About it");
+})
 
 
 
