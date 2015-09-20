@@ -84,10 +84,10 @@ d3.json("full_bechdel.json", function(data){
 			}
 		})
 		.on('mousedown', tip.show)
-		.on('mouseover', animateFirstStep)
-		.on('mouseout', animateSecondStep)
+		.on('mouseover', expandOut)
+		.on('mouseout', shrinkIn)
 
-function animateFirstStep(){
+function expandOut(){
     //d3.select(this)
     d3.select(this.parentNode.appendChild(this))
 
@@ -110,7 +110,7 @@ function animateFirstStep(){
 
 };
 
-function animateSecondStep(){
+function shrinkIn(){
     d3.select(this)
       .transition()
       .delay(500)
