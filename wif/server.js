@@ -15,8 +15,8 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.get('/bechdel.json', function(req, res) {
-	fs.readFile('bechdel.json', function(err, data) {
+app.get('/full_bechdel.json', function(req, res) {
+	fs.readFile('full_bechdel.json', function(err, data) {
 		res.setHeader('Cache-Control', 'no-cache');
 		res.json(JSON.parse(data));
 	});

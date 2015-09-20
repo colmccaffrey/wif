@@ -1,4 +1,4 @@
-
+console.log("linked");
 var data = [4, 8, 15, 16, 23, 42];
 
 d3.select("body")
@@ -30,76 +30,60 @@ barEnter.style("width", function(d) { return x(d) + "px"; });
 
 barEnter.text(function(d) { return d; });
 
-//*****************************
 
 
-// var width = 960,
-//     height = 500;
+//********************
+var margin = {top: 10, right: 5, bottom: 8, left: 10},
 
-// var nodes = d3.range(200).map(function() { return {radius: Math.random() * 12 + 4}; }),
-//     root = nodes[0],
-//     //color = d3.scale.category10();
+    width = 1260 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+var padding = 70;
+var tip = d3.tip()
+  .attr('class', 'd3-tip')
+  .html(function(d) {
+    return d.title + " " + d.year;
+  })
+  .offset([-5, 0])
+  //add css for tip - transition fade in and out
+d3.json("full_bechdel.json", function(data){
+  var svg = d3.select("body")
+ 	.append("svg")
+ 	.attr('id', 'viz')
+ 	.attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+  .call(tip);
+ 
+  curses = svg.selectAll('circle')
+		.data(data)
+		.enter()
+		.append('circle')
+		.attr('class', 'hvr-hang');
+		curses.attr('r', function(d, i) {
+          return Math.abs(d.rating) / d.rating * 10})
+		.attr('cx', function(d) {return Math.max(0 + padding, Math.random() * width - padding)})
+		.attr('cy', function(d) {return Math.max(0 + padding, Math.random() * height - padding)})
+	
+		.style('opacity', 0.8)
+		.style('fill', function(d){
+			if(d.dubious !== '0'){
+				return "#cdcdcd"
+			}
+			else if(d.rating === "3"){
+				return "steelblue"
+			}
+			else if(d.rating === "2"){
+				return "orange"
+			}
+			else if(d.rating === "1"){
+				return "red"
+			}
+			else if(d.rating ==="0"){
+					return "black"
+			}
+		})
+		.on('mouseover', tip.show)
+    .on('mouseout', tip.hide)
+})
 
-// root.radius = 0;
-// root.fixed = true;
-
-// var force = d3.layout.force()
-//     .gravity(0.05)
-//     .charge(function(d, i) { return i ? 0 : -2000; })
-//     .nodes(nodes)
-//     .size([width, height]);
-
-// force.start();
-
-// var svg = d3.select("body").append("svg")
-//     .attr("width", width)
-//     .attr("height", height);
-
-// svg.selectAll("circle")
-//     .data(nodes.slice(1))
-//   .enter().append("circle")
-//     .attr("r", function(d) { return d.radius; })
-//     .style("fill", function(d, i) { return color(i % 3); });
-
-// force.on("tick", function(e) {
-//   var q = d3.geom.quadtree(nodes),
-//       i = 0,
-//       n = nodes.length;
-
-//   while (++i < n) q.visit(collide(nodes[i]));
-
-//   svg.selectAll("circle")
-//       .attr("cx", function(d) { return d.x; })
-//       .attr("cy", function(d) { return d.y; });
-// });
-
-// svg.on("mousemove", function() {
-//   var p1 = d3.mouse(this);
-//   root.px = p1[0];
-//   root.py = p1[1];
-//   force.resume();
-// });
-
-// function collide(node) {
-//   var r = node.radius + 16,
-//       nx1 = node.x - r,
-//       nx2 = node.x + r,
-//       ny1 = node.y - r,
-//       ny2 = node.y + r;
-//   return function(quad, x1, y1, x2, y2) {
-//     if (quad.point && (quad.point !== node)) {
-//       var x = node.x - quad.point.x,
-//           y = node.y - quad.point.y,
-//           l = Math.sqrt(x * x + y * y),
-//           r = node.radius + quad.point.radius;
-//       if (l < r) {
-//         l = (l - r) / l * .5;
-//         node.x -= x *= l;
-//         node.y -= y *= l;
-//         quad.point.x += x;
-//         quad.point.y += y;
-//       }
-//     }
-//     return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
-//   };
-// }
