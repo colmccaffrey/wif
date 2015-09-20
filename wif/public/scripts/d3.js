@@ -39,7 +39,7 @@ var margin = {top: 10, right: 5, bottom: 8, left: 10},
     height = 600 - margin.top - margin.bottom;
 var padding = 10;
 var tip = d3.tip()
-  .attr('class', 'd3-tip')
+  .attr('class', 'tip')
   .html(function(d) {
     return d.title + " " + d.year;
   })
@@ -62,9 +62,29 @@ d3.json("full_bechdel.json", function(data){
 		.attr('class', 'hvr-hang');
 		movies.attr('r', function(d, i) {
           return Math.abs(d.rating) / d.rating * 5})
-		.attr('cx', function(d) {return Math.max(0 + padding, Math.random() * width - padding)})
-		.attr('cy', function(d) {return Math.max(0 + padding, Math.random() * height - padding)})
-	
+		//.attr('cx', function(d) {return Math.max(0 + padding, Math.random() * width - padding)})
+
+		.attr('cx', function(d) {
+			if(d.year < 1980){
+				console.log("year" + d.year)
+			var max = 1000
+			var min = 800
+			function getRandomInt(max, min) {
+    		return Math.floor(Math.random() * (max - min + 1)) + min;
+				}
+			} else if (d.year < 2015) {
+			var max = 700
+			var min = 500
+			function getRandomInt(max, min) {
+    		return Math.floor(Math.random() * (max - min + 1)) + min;
+				}
+			}
+			})
+
+		.attr('cy', function(d) {
+			return Math.max(0 + padding, Math.random() * height - padding)
+		})
+
 		.style('opacity', 0.8)
 		.style('fill', function(d){
 			if(d.dubious !== '0'){
