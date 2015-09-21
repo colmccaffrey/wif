@@ -1,5 +1,5 @@
 console.log("linked");
-var years = [1930, 1940, 1950, 1960, 1980, 1990, 2000, 2010, 2015];
+var years = [1940,  1960, 1980, 2000, 2015];
 
 //***********add styles to div's with d3 instead of css ************
 
@@ -37,7 +37,7 @@ var years = [1930, 1940, 1950, 1960, 1980, 1990, 2000, 2010, 2015];
 //********************
 var margin = {top: 100, right: 100, bottom: 100, left: 100},
     width = 1260 - margin.left - margin.right,
-    height = 1000 - margin.top - margin.bottom;
+    height = 800 - margin.top - margin.bottom;
 var padding = 100;
 var tip = d3.tip()
   .attr('class', 'tip')
@@ -100,8 +100,8 @@ d3.json("full_bechdel.json", function(data){
     movies.attr('r', function(d, i) {
       return Math.abs(d.rating) / d.rating * 5})
     .transition()
-    .delay(100)
-    .duration(1500)
+    .delay(10)
+    .duration(1000)
      .attr('cx', function(d) {
       return Math.floor(Math.random() * 1120)
     })
@@ -119,8 +119,8 @@ d3.select("#yearSort").on("click", function(d){
     movies.attr('r', function(d, i) {
       return Math.abs(d.rating) / d.rating * 5})
     .transition()
-    .delay(100)
-    .duration(1500)
+    .delay(50)
+    .duration(1200)
     //***********cy/cx by year************
     .attr('cx', function(d) {
       var max = 100
@@ -158,57 +158,57 @@ d3.select("#yearSort").on("click", function(d){
 
       } else if(d.year < 2010){
         min = max +700
-        max = max + 800
+        max = max + 850
        return Math.floor(Math.random() * (max - min + 1)) + min;  
        } else if(d.year <= 2015){
-        min = max +800
-        max = max + 900
+        min = max +850
+        max = max + 1000
        return Math.floor(Math.random() * (max - min + 1)) + min;      
       }
       })
 
 
     .attr('cy', function(d) {
-      max = 800
-      min= 720
+      max = 600
+      min= 520
       if(d.year < 1930){
        return Math.floor(Math.random() * (max - min + 1)) + min;
       }
       else if(d.year < 1940){
-        min = min - 80
+        min = min - 60
        return Math.floor(Math.random() * (max - min + 1)) + min;
 
       } else if(d.year < 1950){
-        min = min - 160
+        min = min - 120
        return Math.floor(Math.random() * (max - min + 1)) + min;
 
       } else if(d.year < 1960){
-        min = min - 240
+        min = min - 180
        return Math.floor(Math.random() * (max - min + 1)) + min;
 
       } else if(d.year < 1970){
-        min = min - 320
+        min = min - 240
        return Math.floor(Math.random() * (max - min + 1)) + min;
 
       } else if(d.year < 1980){
-        min = min - 400
+        min = min - 300
        return Math.floor(Math.random() * (max - min + 1)) + min;
 
       } else if(d.year < 1990){
-        min = min - 480
+        min = min - 360
        return Math.floor(Math.random() * (max - min + 1)) + min;
 
       } else if(d.year < 2000){
-        min = min - 560
+        min = min - 420
        return Math.floor(Math.random() * (max - min + 1)) + min;
 
 
       } else if(d.year < 2010){
-        min = min - 640
+        min = min - 480
        return Math.floor(Math.random() * (max - min + 1)) + min;
 
       } else if(d.year <= 2015){
-        min = min - 720
+        min = min - 560
        return Math.floor(Math.random() * (max - min + 1)) + min;
       }
 
@@ -263,27 +263,27 @@ function shrinkIn(){
 		};
 });
 
-// d3.json("full_bechdel.json", function(data){
-//   var linksChart = d3.select(".links")
-//  	.append("svg")
 
+//****************
 
-// d3.json("full_bechdel.json", function(data){
-//   var yearBubbles = d3.select(".bubbles")
-//  	.append("svg")
-var widthLinks = 960,
-    heightLinks = 500;
+var widthLinks = 500,
+ heightLinks = 500;
 
+//Set up the colour scale
 var color = d3.scale.category20();
 
+//Set up the force layout
 var force = d3.layout.force()
     .charge(-120)
     .linkDistance(30)
     .size([widthLinks, heightLinks]);
 
-var linksChart = d3.select(".links").append("svg")
+//Append a SVG to the body of the html page. Assign this SVG as an object to svg
+var chartLinks = d3.select(".links").append("svg")
     .attr("width", widthLinks)
     .attr("height", heightLinks);
+
+//Read the data from the mis element 
 
 d3.json("test.json", function(error, graph) {
   if (error) throw error;
@@ -292,31 +292,153 @@ d3.json("test.json", function(error, graph) {
       .nodes(graph.nodes)
       .links(graph.links)
       .start();
+// var mis = document.getElementById('mis').innerHTML;
+// graph = JSON.parse(mis);
 
-  var link = linksChart.selectAll(".link")
-      .data(graph.links)
+//Creates the graph data structure out of the json data
+force.nodes(graph.nodes)
+    .links(graph.links)
+    .start();
+
+//Create all the line svgs but without locations yet
+var link = chartLinks.selectAll(".link")
+    .data(graph.links)
     .enter().append("line")
-      .attr("class", "link")
-      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+    .attr("class", "link")
+    .style("stroke-width", function (d) {
+    return Math.sqrt(d.value);
+    });
 
-  var node = linksChart.selectAll(".node")
-      .data(graph.nodes)
+//Do the same with the circles for the nodes - no 
+var node = chartLinks.selectAll(".node")
+    .data(graph.nodes)
     .enter().append("circle")
-      .attr("class", "node")
-      .attr("r", 5)
-      .style("fill", function(d) { return color(d.group); })
-      .call(force.drag);
+    .attr("class", "node")
+    .attr("r", 8)
+    .style("fill", function (d) {
+    return color(d.group);
+    })
+    .call(force.drag);
 
-  node.append("title")
-      .text(function(d) { return d.name; });
 
-  force.on("tick", function() {
-    link.attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
+//Now we are giving the SVGs co-ordinates - the force layout is generating the co-ordinates which this code is using to update the attributes of the SVG elements
+force.on("tick", function () {
+    link.attr("x1", function (d) {
+        return d.source.x;
+    })
+        .attr("y1", function (d) {
+        return d.source.y;
+    })
+        .attr("x2", function (d) {
+        return d.target.x;
+    })
+        .attr("y2", function (d) {
+        return d.target.y;
+    });
 
-    node.attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; });
-  });
+    node.attr("cx", function (d) {
+        return d.x;
+    })
+        .attr("cy", function (d) {
+        return d.y;
+    });
+      });
+
+
+
+var optArray = [];
+for (var i = 0; i < graph.nodes.length - 1; i++) {
+    optArray.push(graph.nodes[i].name);
+}
+
+optArray = optArray.sort();
+
+$(function () {
+    $("#search").autocomplete({
+        source: optArray
+    });
 });
+});
+
+function searchNode() {
+
+    //find the node
+
+    var selectedVal = document.getElementById('search').value;
+    var node = chartLinks.selectAll(".node");
+
+    if (selectedVal == "none") {
+        node.style("stroke", "white").style("stroke-width", "1");
+    } else {
+        var selected = node.filter(function (d, i) {
+            return d.name != selectedVal;
+        });
+        selected.style("opacity", "0");
+        var link = chartLinks.selectAll(".link")
+        link.style("opacity", "0");
+        d3.selectAll(".node, .link").transition()
+            .duration(5000)
+            .style("opacity", 1);
+
+
+    }
+}
+
+
+// d3.json("full_bechdel.json", function(data){
+//   var linksChart = d3.select(".links")
+//  	.append("svg")
+
+
+// d3.json("full_bechdel.json", function(data){
+//   var yearBubbles = d3.select(".bubbles")
+//  	.append("svg")
+// var widthLinks = 960,
+//     heightLinks = 500;
+
+// var color = d3.scale.category20();
+
+// var force = d3.layout.force()
+//     .charge(-120)
+//     .linkDistance(30)
+//     .size([widthLinks, heightLinks]);
+
+// var linksChart = d3.select(".links").append("svg")
+//     .attr("width", widthLinks)
+//     .attr("height", heightLinks);
+
+// d3.json("test.json", function(error, graph) {
+//   if (error) throw error;
+
+//   force
+//       .nodes(graph.nodes)
+//       .links(graph.links)
+//       .start();
+
+//   var link = linksChart.selectAll(".link")
+//       .data(graph.links)
+//     .enter().append("line")
+//       .attr("class", "link")
+//       .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+//   var node = linksChart.selectAll(".node")
+//       .data(graph.nodes)
+//     .enter().append("circle")
+//       .attr("class", "node")
+//       .attr("r", 5)
+//       .style("fill", function(d) { return color(d.group); })
+//       .call(force.drag);
+
+//   node.append("title")
+//       .text(function(d) { return d.name; });
+
+//   force.on("tick", function() {
+//     link.attr("x1", function(d) { return d.source.x; })
+//         .attr("y1", function(d) { return d.source.y; })
+//         .attr("x2", function(d) { return d.target.x; })
+//         .attr("y2", function(d) { return d.target.y; });
+
+//     node.attr("cx", function(d) { return d.x; })
+//         .attr("cy", function(d) { return d.y; });
+//   });
+// });

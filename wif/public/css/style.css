@@ -19,8 +19,22 @@ p {
 	text-align: left;
 }
 
+ul.timeline{
+	width: 1260px;
+	margin-left: 60px;
+	margin-top: -20px;
+	list-style: none;
+	display: inline-block;
+	font-size: 28px;
 
-
+}
+ul.timeline li{
+	border-right: 3px solid black;
+	text-align: right;
+	display: inline;
+	margin-left: 130px;
+	padding: 1%;
+}
 .signatureList {
 	width: 80vw;
 	height: auto;

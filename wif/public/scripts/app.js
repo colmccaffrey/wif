@@ -3,23 +3,36 @@ var Main = React.createClass({
 	render: function() {
 		return (
 			<div className = "main">
-			<Nav/>
+			<Header/>
+			<About />
 			</div>
 			);
 	}
 });
 //*****************nav bar*****************
-var Nav = React.createClass({
+var About = React.createClass({
 	render: function(){
 		return (
-			<div className = "nav">
-			<button class= "navItem">Home</button>
-			<button class= "navItem">About</button>
+			<div className = "about">
+			<p>All ABout WIFR</p>
+			<p>ALl ABout the bechdel test</p>
+			<a href="http://bechdeltest.com/api/v1/doc" target="_blank">API Credit</a>
 			</div>
+			
 			);
 	}
 });
+var Header = React.createClass({
+	render: function(){
+		return(
+			<div className="logo">
+			<h1>Wifr</h1>
+			<h3><em>representations  of women in film</em></h3>
+			</div>
 
+			)
+	}
+})
 
 //*********call to action sign up**********
 var SignupForm = React.createClass({
@@ -43,7 +56,7 @@ var SignupForm = React.createClass({
 			<input type = "text" placeholder="Your Name" ref="signature"/>
 			<input type = "text" placeholder = "Your email" ref="email" />
 			<input type = "text" placeholder = "City/State" ref="location" />
-			<input type="submit" value="Post" />
+			<input type="submit" value="Post" name="Sign"/>
 			</form>
 			);
 	}
@@ -107,8 +120,10 @@ var CallToAction = React.createClass({
 	render: function(){
 		return(
 			<div className = "callToAction">
+			<h3>Benefit from the exploration of a greater range of human experience.</h3>
+			<h1>Demand more diversity in film and media.</h1>
 			<SignupForm onSignatureSubmit = {this.handleSignatureSubmit} />
-			<h2>Sign Petition </h2>
+
 			<SignatureList data = {this.state.data}/>
 			</div>
 			);
