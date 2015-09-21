@@ -1,0 +1,37 @@
+[
+    {
+        "signature": "Misty Jacob",
+        "email": "viewer@gmail.com",
+        "location": "LA"
+    },
+    {
+        "signature": "Laura Wilson",
+        "email": "viewer2@gmail.com",
+        "location": "New York, NY"
+    },
+    {
+        "signature": "Ryan Reynolds",
+        "email": "actor@gmail.com",
+        "location": "Los Angeles, CA"
+    },
+    {
+        "signature": "Misty Jacob",
+        "email": "anotherviewer@gmail.com",
+        "location": "Brooklyn"
+    },
+    {
+        "signature": "Misty Jacob",
+        "email": "thisactress@gmail.com",
+        "location": "New York"
+    },
+    {
+        "signature": "Pen",
+        "email": "email",
+        "location": "LA"
+    },
+    {
+        "signature": "Pumkin",
+        "email": "email",
+        "location": "LA"
+    }
+]

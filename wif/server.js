@@ -22,11 +22,35 @@ app.get('/full_bechdel.json', function(req, res) {
 	});
 });
 
+app.get('/signatures.json', function(req, res) {
+	fs.readFile('signatures.json', function(err, data) {
+		res.setHeader('Cache-Control', 'no-cache');
+		res.json(JSON.parse(data));
+	});
+});
+
+app.post('/signatures.json', function(req, res){
+	fs.readFile('signatures.json', function(err, data){
+		var signatures = JSON.parse(data);
+		signatures.push(req.body);
+		fs.writeFile('signatures.json', JSON.stringify(signatures, null, 4), function(err){
+			res.setHeader('Cache-Control', 'no-cache');
+			res.json(signatures);
+		});
+	});
+});
+
 app.get('/about', function(req, res){
-	res.send("All About it");
+	res.send("working on about");
 })
 
-
+//*****delete this!!***********
+app.get('/test.json', function(req, res) {
+	fs.readFile('test.json', function(err, data) {
+		res.setHeader('Cache-Control', 'no-cache');
+		res.json(JSON.parse(data));
+	});
+});
 
 
 app.listen(app.get('port'), function() {

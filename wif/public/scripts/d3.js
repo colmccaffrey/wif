@@ -45,7 +45,7 @@ var tip = d3.tip()
   .offset([50, 0])
   //add css for tip - transition fade in and out
 d3.json("full_bechdel.json", function(data){
-  var svg = d3.select("body")
+  var yearBubbles = d3.select(".bubbles")
  	.append("svg")
  	//.attr('id', 'viz')
  	.attr("width", width + margin.left + margin.right)
@@ -55,7 +55,7 @@ d3.json("full_bechdel.json", function(data){
   .call(tip);
  
 
-  movies = svg.selectAll('circle')
+  var movies = yearBubbles.selectAll('circle')
 		.data(data)
 		.enter()
 		.append('circle')
@@ -186,7 +186,7 @@ function expandOut(){
       .transition()            
         .delay(0)            
         .duration(100)
-
+  		  .style("stroke", "white")
         .attr('r', function(d){
         	if(d.rating === '3'){
         		return 30;
@@ -215,4 +215,61 @@ function shrinkIn(){
 		};
 });
 
+// d3.json("full_bechdel.json", function(data){
+//   var linksChart = d3.select(".links")
+//  	.append("svg")
+
+
+// d3.json("full_bechdel.json", function(data){
+//   var yearBubbles = d3.select(".bubbles")
+//  	.append("svg")
+var widthLinks = 960,
+    heightLinks = 500;
+
+var color = d3.scale.category20();
+
+var force = d3.layout.force()
+    .charge(-120)
+    .linkDistance(30)
+    .size([widthLinks, heightLinks]);
+
+var linksChart = d3.select(".links").append("svg")
+    .attr("width", widthLinks)
+    .attr("height", heightLinks);
+
+d3.json("test.json", function(error, graph) {
+  if (error) throw error;
+
+  force
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .start();
+
+  var link = linksChart.selectAll(".link")
+      .data(graph.links)
+    .enter().append("line")
+      .attr("class", "link")
+      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+  var node = linksChart.selectAll(".node")
+      .data(graph.nodes)
+    .enter().append("circle")
+      .attr("class", "node")
+      .attr("r", 5)
+      .style("fill", function(d) { return color(d.group); })
+      .call(force.drag);
+
+  node.append("title")
+      .text(function(d) { return d.name; });
+
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  });
+});
 
