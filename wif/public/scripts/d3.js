@@ -1,34 +1,36 @@
 console.log("linked");
-var data = [4, 8, 15, 16, 23, 42];
+var years = [1930, 1940, 1950, 1960, 1980, 1990, 2000, 2010, 2015];
 
-d3.select("body")
-    .style("color", "black")
-    .style("background-color", "white");
+//***********add styles to div's with d3 instead of css ************
 
-    d3.selectAll("section")
-    .attr("class", "special")
-  .append("div")
-    .html("<h1>Hello, world!</h1>");
+// d3.select("body")
+//     .style("color", "black")
+//     .style("background-color", "white");
 
-    var section = d3.selectAll("section");
+// d3.selectAll("section")
+//  .attr("class", "timeline")
+//  .append("div")
+//  .append("ul")
 
-section.append("div")
-    .html("First!");
+//  var timeLine = d3.select("#timeline")
+//  var numbers = timeLine.selectAll("ul");
+//   .enter
 
-section.append("div")
-    .html("Second.");
 
-var x = d3.scale.linear()
-.domain([0, d3.max(data)])
-.range([0, 420]);
+// section.append("div")
+//     .html("</h2>1940</h2>");
 
-var chart = d3.select(".chart");
-var bar = chart.selectAll("div");
-var barUpdate = bar.data(data);
-var barEnter = barUpdate.enter().append("div");
-barEnter.style("width", function(d) { return x(d) + "px"; });
+// var x = d3.scale.linear()
+// .domain([0, d3.max(data)])
+// .range([0, 420]);
 
-barEnter.text(function(d) { return d; });
+// var chart = d3.select(".chart");
+// var bar = chart.selectAll("div");
+// var barUpdate = bar.data(data);
+// var barEnter = barUpdate.enter().append("div");
+// barEnter.style("width", function(d) { return x(d) + "px"; });
+
+// barEnter.text(function(d) { return d; });
 
 
 
@@ -47,10 +49,10 @@ var tip = d3.tip()
 d3.json("full_bechdel.json", function(data){
   var yearBubbles = d3.select(".bubbles")
  	.append("svg")
- 	//.attr('id', 'viz')
- 	.attr("width", width + margin.left + margin.right)
+ 	  .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
+   
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
   .call(tip);
  
@@ -64,100 +66,13 @@ d3.json("full_bechdel.json", function(data){
           return Math.abs(d.rating) / d.rating * 5})
 
 		//*********random cy/cx *************
-		// .attr('cx', function(d) {return Math.max(0 + padding, Math.random() * width - padding)})
-		// .attr('cy', function(d) {return Math.max(0 + padding, Math.random() * height - padding)})
-		
-		//***********cy/cx by year************
 		.attr('cx', function(d) {
-			var max = 100
-			var min = 0
-			if(d.year < 1930){
-				return Math.floor(Math.random() * (max - min + 1)) + min;	
-			}else if (d.year < 1940){
-				 min = max 
-				max = max + 100
-			 return Math.floor(Math.random() * (max - min + 1)) + min;	
-			}else if(d.year < 1950){
-				min = max +100
-				max = max + 200
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;	
-			} else if(d.year < 1960){
-				min = max  + 200
-				max = max + 300
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;
-			} else if(d.year < 1970){
-				min = max + 300
-				max = max + 400
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;
-			} else if(d.year < 1980){
-				min = max +400
-				max = max + 500
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;		
-			} else if(d.year < 1990){
-				min = max +500
-				max = max + 600
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;			
-			} else if(d.year < 2000){
-				min = max +600
-				max = max + 700
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;			
-
-			} else if(d.year < 2010){
-				min = max +700
-				max = max + 800
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;	
-  		 } else if(d.year <= 2015){
-				min = max +800
-				max = max + 900
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;			
-			}
-			})
-
-
-		.attr('cy', function(d) {
-			max = 800
-			min= 720
-			if(d.year < 1930){
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;
-			}
-			else if(d.year < 1940){
-				min = min - 80
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;
-
-			} else if(d.year < 1950){
-				min = min - 160
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;
-
-			} else if(d.year < 1960){
-				min = min - 240
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;
-
-			} else if(d.year < 1970){
-				min = min - 320
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;
-
-			} else if(d.year < 1980){
-				min = min - 400
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;
-
-			} else if(d.year < 1990){
-				min = min - 480
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;
-
-			} else if(d.year < 2000){
-				min = min - 560
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;
-
-
-			} else if(d.year < 2010){
-				min = min - 640
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;
-
-			} else if(d.year <= 2015){
-				min = min - 720
-  		 return Math.floor(Math.random() * (max - min + 1)) + min;
-  		}
-			})
+      return Math.floor(Math.random() * 1120)
+    })
+     .attr('cy', function(d) {
+      return Math.floor(Math.random() * 600)
+    })
+		
 
 		.style('opacity', 0.8)
 		.style('fill', function(d){
@@ -167,17 +82,150 @@ d3.json("full_bechdel.json", function(data){
 			else if(d.rating === "2"){
 				return "gold"
 			}
-			else if(d.rating === "1"){
+			else if(d.rating <= "1"){
 				return "orange"
-			}
-			else if(d.rating ==="0"){
-					return "red"
+		
 			}
 		})
 		.on('mousedown', tip.show)
 		.on('mouseover', expandOut)
 		.on('mouseout', shrinkIn)
 
+  d3.select("#seeAll").on("click", function(){
+      yearBubbles.selectAll('circle')
+      .data(data)
+    .enter()
+    .append('circle')
+    .attr('class', 'hvr-hang');
+    movies.attr('r', function(d, i) {
+      return Math.abs(d.rating) / d.rating * 5})
+    .transition()
+    .delay(100)
+    .duration(1500)
+     .attr('cx', function(d) {
+      return Math.floor(Math.random() * 1120)
+    })
+     .attr('cy', function(d) {
+      return Math.floor(Math.random() * 600)
+    })
+});
+
+d3.select("#yearSort").on("click", function(d){
+   yearBubbles.selectAll('circle')
+    .data(data)
+    .enter()
+    .append('circle')
+    .attr('class', 'hvr-hang');
+    movies.attr('r', function(d, i) {
+      return Math.abs(d.rating) / d.rating * 5})
+    .transition()
+    .delay(100)
+    .duration(1500)
+    //***********cy/cx by year************
+    .attr('cx', function(d) {
+      var max = 100
+      var min = 0
+      if(d.year < 1930){
+        return Math.floor(Math.random() * (max - min + 1)) + min; 
+      }else if (d.year < 1940){
+         min = max 
+        max = max + 100
+       return Math.floor(Math.random() * (max - min + 1)) + min;  
+      }else if(d.year < 1950){
+        min = max +100
+        max = max + 200
+       return Math.floor(Math.random() * (max - min + 1)) + min;  
+      } else if(d.year < 1960){
+        min = max  + 200
+        max = max + 300
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+      } else if(d.year < 1970){
+        min = max + 300
+        max = max + 400
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+      } else if(d.year < 1980){
+        min = max +400
+        max = max + 500
+       return Math.floor(Math.random() * (max - min + 1)) + min;    
+      } else if(d.year < 1990){
+        min = max +500
+        max = max + 600
+       return Math.floor(Math.random() * (max - min + 1)) + min;      
+      } else if(d.year < 2000){
+        min = max +600
+        max = max + 700
+       return Math.floor(Math.random() * (max - min + 1)) + min;      
+
+      } else if(d.year < 2010){
+        min = max +700
+        max = max + 800
+       return Math.floor(Math.random() * (max - min + 1)) + min;  
+       } else if(d.year <= 2015){
+        min = max +800
+        max = max + 900
+       return Math.floor(Math.random() * (max - min + 1)) + min;      
+      }
+      })
+
+
+    .attr('cy', function(d) {
+      max = 800
+      min= 720
+      if(d.year < 1930){
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      else if(d.year < 1940){
+        min = min - 80
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+
+      } else if(d.year < 1950){
+        min = min - 160
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+
+      } else if(d.year < 1960){
+        min = min - 240
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+
+      } else if(d.year < 1970){
+        min = min - 320
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+
+      } else if(d.year < 1980){
+        min = min - 400
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+
+      } else if(d.year < 1990){
+        min = min - 480
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+
+      } else if(d.year < 2000){
+        min = min - 560
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+
+
+      } else if(d.year < 2010){
+        min = min - 640
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+
+      } else if(d.year <= 2015){
+        min = min - 720
+       return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      })
+    showTimeline();
+
+});
+
+function showTimeline(){
+   var axis = d3.select("ul").selectAll("li")
+    .data(years)
+    .enter()
+    .append("li")
+    .text(function(d){
+      return d
+    })
+  };
 
 function expandOut(){
     //d3.select(this)
@@ -272,4 +320,3 @@ d3.json("test.json", function(error, graph) {
         .attr("cy", function(d) { return d.y; });
   });
 });
-

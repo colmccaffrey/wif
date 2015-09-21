@@ -20,6 +20,7 @@ var Nav = React.createClass({
 	}
 });
 
+
 //*********call to action sign up**********
 var SignupForm = React.createClass({
 	handleSubmit: function(e) {
@@ -53,9 +54,9 @@ var Signature = React.createClass({
 		var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
 		return(
 			<div className = "signature">
-			<h2 className = "signatureName">
+			<h3 className = "signatureName">
 			 <em>{this.props.signature}</em>
-			</h2>
+			</h3>
 			<span dangerouslySetInnerHTML={{__html: rawMarkup}} />
 			</div>
 			);
