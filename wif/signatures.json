@@ -43,5 +43,15 @@
         "signature": "col",
         "email": "email",
         "location": "ny"
+    },
+    {
+        "signature": "nev",
+        "email": "nev@com",
+        "location": "new york"
+    },
+    {
+        "signature": "Nev",
+        "email": "email@com",
+        "location": "Brooklyn"
     }
 ]

@@ -1,40 +1,6 @@
 console.log("linked");
 var years = [1940,  1960, 1980, 2000, 2015];
 
-//***********add styles to div's with d3 instead of css ************
-
-// d3.select("body")
-//     .style("color", "black")
-//     .style("background-color", "white");
-
-// d3.selectAll("section")
-//  .attr("class", "timeline")
-//  .append("div")
-//  .append("ul")
-
-//  var timeLine = d3.select("#timeline")
-//  var numbers = timeLine.selectAll("ul");
-//   .enter
-
-
-// section.append("div")
-//     .html("</h2>1940</h2>");
-
-// var x = d3.scale.linear()
-// .domain([0, d3.max(data)])
-// .range([0, 420]);
-
-// var chart = d3.select(".chart");
-// var bar = chart.selectAll("div");
-// var barUpdate = bar.data(data);
-// var barEnter = barUpdate.enter().append("div");
-// barEnter.style("width", function(d) { return x(d) + "px"; });
-
-// barEnter.text(function(d) { return d; });
-
-
-
-//********************
 var margin = {top: 100, right: 100, bottom: 100, left: 100},
     width = 1260 - margin.left - margin.right,
     height = 800 - margin.top - margin.bottom;
@@ -73,10 +39,12 @@ d3.json("full_bechdel.json", function(data){
       return Math.floor(Math.random() * 600)
     })
 		
-
+    .style("stroke", "white")
 		.style('opacity', 0.8)
 		.style('fill', function(d){
-			if(d.rating === "3"){
+     if(d.dubious != '0'){
+            return "#cdcdcd"
+     }else if(d.rating === "3"){
 				return "steelblue"
 			}
 			else if(d.rating === "2"){
@@ -98,10 +66,11 @@ d3.json("full_bechdel.json", function(data){
     .append('circle')
     .attr('class', 'hvr-hang');
     movies.attr('r', function(d, i) {
-      return Math.abs(d.rating) / d.rating * 5})
+      return Math.abs(d.rating) / d.rating * 6})
     .transition()
     .delay(10)
     .duration(1000)
+
      .attr('cx', function(d) {
       return Math.floor(Math.random() * 1120)
     })
@@ -236,7 +205,7 @@ function expandOut(){
         .duration(100)
   		  .style("stroke", "white")
         .attr('r', function(d){
-        	if(d.rating === '3'){
+          if(d.rating === '3'){
         		return 30;
         	}
         	else if(d.rating ==="2"){
@@ -266,7 +235,7 @@ function shrinkIn(){
 
 //****************
 
-var widthLinks = 500,
+var widthLinks = 800,
  heightLinks = 500;
 
 //Set up the colour scale
@@ -296,9 +265,7 @@ d3.json("test.json", function(error, graph) {
 // graph = JSON.parse(mis);
 
 //Creates the graph data structure out of the json data
-force.nodes(graph.nodes)
-    .links(graph.links)
-    .start();
+
 
 //Create all the line svgs but without locations yet
 var link = chartLinks.selectAll(".link")
@@ -314,9 +281,18 @@ var node = chartLinks.selectAll(".node")
     .data(graph.nodes)
     .enter().append("circle")
     .attr("class", "node")
-    .attr("r", 8)
+    .attr("r", 12)
     .style("fill", function (d) {
-    return color(d.group);
+      if(d.group === "3"){
+        return "steelblue"
+      }
+      else if(d.group === "2"){
+        return "gold"
+      }
+      else if(d.group <= "1"){
+        return "orange"
+    
+      }
     })
     .call(force.drag);
 
@@ -377,68 +353,12 @@ function searchNode() {
         var link = chartLinks.selectAll(".link")
         link.style("opacity", "0");
         d3.selectAll(".node, .link").transition()
-            .duration(5000)
+            .duration(8000)
             .style("opacity", 1);
 
 
     }
+
 }
 
 
-// d3.json("full_bechdel.json", function(data){
-//   var linksChart = d3.select(".links")
-//  	.append("svg")
-
-
-// d3.json("full_bechdel.json", function(data){
-//   var yearBubbles = d3.select(".bubbles")
-//  	.append("svg")
-// var widthLinks = 960,
-//     heightLinks = 500;
-
-// var color = d3.scale.category20();
-
-// var force = d3.layout.force()
-//     .charge(-120)
-//     .linkDistance(30)
-//     .size([widthLinks, heightLinks]);
-
-// var linksChart = d3.select(".links").append("svg")
-//     .attr("width", widthLinks)
-//     .attr("height", heightLinks);
-
-// d3.json("test.json", function(error, graph) {
-//   if (error) throw error;
-
-//   force
-//       .nodes(graph.nodes)
-//       .links(graph.links)
-//       .start();
-
-//   var link = linksChart.selectAll(".link")
-//       .data(graph.links)
-//     .enter().append("line")
-//       .attr("class", "link")
-//       .style("stroke-width", function(d) { return Math.sqrt(d.value); });
-
-//   var node = linksChart.selectAll(".node")
-//       .data(graph.nodes)
-//     .enter().append("circle")
-//       .attr("class", "node")
-//       .attr("r", 5)
-//       .style("fill", function(d) { return color(d.group); })
-//       .call(force.drag);
-
-//   node.append("title")
-//       .text(function(d) { return d.name; });
-
-//   force.on("tick", function() {
-//     link.attr("x1", function(d) { return d.source.x; })
-//         .attr("y1", function(d) { return d.source.y; })
-//         .attr("x2", function(d) { return d.target.x; })
-//         .attr("y2", function(d) { return d.target.y; });
-
-//     node.attr("cx", function(d) { return d.x; })
-//         .attr("cy", function(d) { return d.y; });
-//   });
-// });

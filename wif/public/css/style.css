@@ -1,6 +1,10 @@
 #container{
-	margin-bottom: 100px;
+	margin-bottom: 10px;
 
+}
+.main{
+	width: 800px;
+	margin: auto;
 }
 section{
 	border: 1px solid black;
@@ -10,7 +14,28 @@ section{
 	color: "#cdcdcd";
 	text-align: center;
 	margin-bottom: 0;
+	margin-top: 10%;
+	background-color: "#cdcdcd";
+	padding-top: 2%;
 
+}
+#search, #sort{
+	text-align: center;
+	margin: auto;
+}
+
+.ui-widget{
+	float: right;
+	margin-top: -10%;
+	margin-right: 15%;
+}
+
+#sort {
+
+}
+#wrapper{
+	width: 100vw;
+	height: 100vh;
 }
 p {
 	color: "#cdcdcd";
@@ -21,11 +46,13 @@ p {
 
 ul.timeline{
 	width: 1260px;
-	margin-left: 60px;
-	margin-top: -20px;
+	margin-left: 58px;
+	margin-top: -60px;
 	list-style: none;
 	display: inline-block;
 	font-size: 28px;
+	position: absolute;
+	color: "steelblue"
 
 }
 ul.timeline li{
@@ -41,6 +68,7 @@ ul.timeline li{
 	display: inline-block;
 	background-color: "#cdcdcd";
 	text-align: none;
+	margin-top: 5%;
 
 
 }
@@ -79,6 +107,6 @@ h2.signatureName {
 }
 .links {
 	height: 600;
-	width: 960;
+	width: 800;
 	margin: auto;
 }

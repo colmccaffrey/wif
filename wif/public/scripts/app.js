@@ -27,7 +27,7 @@ var Header = React.createClass({
 		return(
 			<div className="logo">
 			<h1>Wifr</h1>
-			<h3><em>representations  of women in film</em></h3>
+			<h3><em>representations of women in film</em></h3>
 			</div>
 
 			)
@@ -120,7 +120,7 @@ var CallToAction = React.createClass({
 	render: function(){
 		return(
 			<div className = "callToAction">
-			<h3>Benefit from the exploration of a greater range of human experience.</h3>
+			<h2>We all benefit from the exploration of a greater range of human experience.</h2>
 			<h1>Demand more diversity in film and media.</h1>
 			<SignupForm onSignatureSubmit = {this.handleSignatureSubmit} />
 
