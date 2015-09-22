@@ -52,8 +52,8 @@ d3.json("full_bechdel.json", function(data){
 			}
 			else if(d.rating <= "1"){
 				return "orange"
-		
-			}
+
+      }
 		})
 		.on('mousedown', tip.show)
 		.on('mouseover', expandOut)
@@ -281,7 +281,7 @@ var node = chartLinks.selectAll(".node")
     .data(graph.nodes)
     .enter().append("circle")
     .attr("class", "node")
-    .attr("r", 12)
+    .attr("r", 10)
     .style("fill", function (d) {
       if(d.group === "3"){
         return "steelblue"
@@ -291,8 +291,8 @@ var node = chartLinks.selectAll(".node")
       }
       else if(d.group <= "1"){
         return "orange"
-    
       }
+    
     })
     .call(force.drag);
 

@@ -1,6 +1,6 @@
 {
   "nodes":[
-    {"name":"Myriel","group":1},
+    {"name":"Myriel","group":"1"},
     {"group":"3","name":"A Little Chaos","year":"2015"},
     {"group":"3","name":"The Age of Adaline","year":"2015"},
     {"group":"2","dubious":"1","name":"Almost Mercy","year":"2015"},

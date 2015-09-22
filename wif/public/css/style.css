@@ -19,6 +19,22 @@ section{
 	padding-top: 2%;
 
 }
+	svg#dotKey{
+position: absolut;
+	margin-top: -170px;
+	margin-bottom: 1%;
+	padding-left: 1%;
+	padding-top: 1%;
+	margin-left: 24%;
+
+}
+
+#key{
+	text-align: left;
+	width: 600px;
+	margin: auto;
+	padding-top: 2%;
+	}
 #search, #sort{
 	text-align: center;
 	margin: auto;
