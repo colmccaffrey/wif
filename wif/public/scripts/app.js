@@ -14,8 +14,10 @@ var About = React.createClass({
 	render: function(){
 		return (
 			<div className = "about">
-			<p>All ABout WIFR</p>
-			<p>ALl ABout the bechdel test</p>
+			<p> Women live multidimensional lives, films should represent that. </p>
+				<h4>Don't just wife her.</h4>
+			<p>The Bechdel test asks whether a work of fiction features at least two women who talk to each other about something other than a man. Only about half of all films meet these requirements, according to user-edited databases and the media industry press. The test is used as an indicator for the active presence of women in films and other fiction.</p>
+			<p>The Bechdel test (/ˈbɛkdəl/ bek-dəl), also known as the Bechdel-Wallace test, is named for the American cartoonist Alison Bechdel, in whose comic strip Dykes to Watch Out For it first appeared in 1985. Bechdel credited the idea to a friend, Liz Wallace, and to the writings of Virginia Woolf. </p>
 			<a href="http://bechdeltest.com/api/v1/doc" target="_blank">API Credit</a>
 			</div>
 			
