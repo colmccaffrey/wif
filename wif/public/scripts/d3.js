@@ -235,8 +235,8 @@ function shrinkIn(){
 
 //****************
 
-var widthLinks = 800,
- heightLinks = 500;
+var widthLinks = 600,
+ heightLinks = 400;
 
 //Set up the colour scale
 var color = d3.scale.category20();

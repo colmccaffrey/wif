@@ -5,7 +5,17 @@
 .main{
 	width: 500px;
 	margin-left: 20%;
-	margin-top: 5%;
+	margin-top: 2%;
+	margin-bottom: 1%;
+
+}
+.main p{
+	color: #888888;
+	font-size: 12px;
+}
+.main a{
+	color: "orange";
+	font-size: 12px;
 }
 section{
 	border: 1px solid black;
@@ -44,7 +54,7 @@ position: absolut;
 .ui-widget{
 	float: right;
 	margin-top: 10%;
-	margin-right: 15%;
+	margin-right: 20%;
 
 }
 
@@ -124,7 +134,7 @@ h2.signatureName {
   stroke-opacity: .6;
 }
 .links {
-	height: 600;
-	width: 800;
-	margin: auto;
+	height: 400;
+	width: 600;
+	margin-left: 15%;
 }

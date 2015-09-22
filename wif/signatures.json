@@ -15,43 +15,13 @@
         "location": "Los Angeles, CA"
     },
     {
-        "signature": "Misty Jacob",
-        "email": "anotherviewer@gmail.com",
-        "location": "Brooklyn"
-    },
-    {
-        "signature": "Misty Jacob",
-        "email": "thisactress@gmail.com",
-        "location": "New York"
-    },
-    {
-        "signature": "Pen",
-        "email": "email",
-        "location": "LA"
-    },
-    {
-        "signature": "Pumkin",
-        "email": "email",
-        "location": "LA"
-    },
-    {
-        "signature": "col",
-        "email": "emqil@com",
-        "location": "LA"
-    },
-    {
-        "signature": "col",
-        "email": "email",
-        "location": "ny"
-    },
-    {
-        "signature": "nev",
-        "email": "nev@com",
-        "location": "new york"
-    },
-    {
         "signature": "Nev",
         "email": "email@com",
         "location": "Brooklyn"
+    },
+    {
+        "signature": "Tina fey",
+        "email": "tina@com",
+        "location": "New york city"
     }
 ]
