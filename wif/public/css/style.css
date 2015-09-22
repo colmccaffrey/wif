@@ -26,14 +26,14 @@ position: absolut;
 	margin-bottom: 1%;
 	padding-left: 1%;
 	padding-top: 1%;
-	margin-left: 24%;
+	margin-left: 25%;
 
 }
 
 #key{
 	text-align: left;
-	width: 600px;
-	margin: auto;
+	width: 60vw;
+	margin-left: 30%;
 	padding-top: 2%;
 	}
 #search, #sort{
